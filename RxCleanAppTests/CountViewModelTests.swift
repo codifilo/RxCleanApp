@@ -2,6 +2,7 @@ import XCTest
 import RxCocoa
 import RxSwift
 import RxTest
+import SnapshotTesting
 @testable import RxCleanApp
 
 final class CountViewModelTests: XCTestCase {
@@ -10,6 +11,15 @@ final class CountViewModelTests: XCTestCase {
     private var interactor: CountInteractorMock!
     private var sut: CountViewModelImplementation<CountInteractorMock>!
     private var scheduler: TestScheduler!
+    
+    override class func setUp() {
+        super.setUp()
+
+        // This is a global flag, if it's `true`, when the test runs it'll create a reference jsons
+        // instead of check the assertions.
+        // When the reference jsons have been generated, this flag should be `false`.
+        isRecording = false
+    }
     
     override func setUp() {
         super.setUp()
@@ -65,20 +75,16 @@ final class CountViewModelTests: XCTestCase {
             .disposed(by: disposeBag)
         
         // Collect view states
-        let viewStates = scheduler.createObserver(CountViewState.self)
-        sut.viewState.drive(viewStates).disposed(by: disposeBag)
+        let result = scheduler.createObserver(CountViewState.self)
+        sut.viewState.drive(result).disposed(by: disposeBag)
         
         scheduler.start()
         
-        // Compare with expected result
-        let expectedResult: [Recorded<Event<CountViewState>>] = [
-            .init(time: 0, value: .next(.init(countLabelText: "0 taps so far"))),
-            .init(time: 100, value: .next(.init(countLabelText: "5 taps so far"))),
-            .init(time: 200, value: .next(.init(countLabelText: "199 taps so far"))),
-            .init(time: 300, value: .next(.init(countLabelText: "38742 taps so far"))),
-        ]
+        let times = result.events.map(\.time)
+        assertSnapshot(matching: times, as: .json)
+        let elements = result.events.compactMap(\.value.element)
+        assertSnapshot(matching: elements, as: .json)
         
-        assertEquals(viewStates.events, expectedResult)
         
         // Check it shows the alert message one time
         XCTAssertEqual(router.showAlertCallCount, 2)
