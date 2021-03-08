@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		392B5FFD25F3ED2B00E6ED8B /* CountViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392B5FFC25F3ED2B00E6ED8B /* CountViewFactory.swift */; };
 		3940671225F4C7670021B394 /* Encodable+Diff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3940671125F4C7670021B394 /* Encodable+Diff.swift */; };
+		395AD45625F601DB00A95E53 /* RxText+Encodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395AD45525F601DB00A95E53 /* RxText+Encodable.swift */; };
 		3990A8F825F53F8A00260539 /* UpdatableLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3990A8F725F53F8A00260539 /* UpdatableLayout.swift */; };
 		39D72E8F25F3DCD900E585B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D72E8E25F3DCD900E585B4 /* AppDelegate.swift */; };
 		39D72ED325F3DD6D00E585B4 /* CountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D72EC825F3DD6D00E585B4 /* CountViewModel.swift */; };
@@ -49,6 +50,7 @@
 		112D9882A9ED709286BDD5A7 /* Pods-RxCleanApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxCleanApp.release.xcconfig"; path = "Target Support Files/Pods-RxCleanApp/Pods-RxCleanApp.release.xcconfig"; sourceTree = "<group>"; };
 		392B5FFC25F3ED2B00E6ED8B /* CountViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountViewFactory.swift; sourceTree = "<group>"; };
 		3940671125F4C7670021B394 /* Encodable+Diff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Diff.swift"; sourceTree = "<group>"; };
+		395AD45525F601DB00A95E53 /* RxText+Encodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RxText+Encodable.swift"; sourceTree = "<group>"; };
 		3990A8F725F53F8A00260539 /* UpdatableLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatableLayout.swift; sourceTree = "<group>"; };
 		39D72E8B25F3DCD900E585B4 /* RxCleanApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxCleanApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39D72E8E25F3DCD900E585B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				39D72EFD25F3DDAF00E585B4 /* CountInteractorTests.swift */,
 				39D72EF825F3DDAF00E585B4 /* CountViewModelTests.swift */,
 				3940671125F4C7670021B394 /* Encodable+Diff.swift */,
+				395AD45525F601DB00A95E53 /* RxText+Encodable.swift */,
 				39D72EA725F3DCDB00E585B4 /* Info.plist */,
 			);
 			path = RxCleanAppTests;
@@ -441,6 +444,7 @@
 				39D72F0025F3DDAF00E585B4 /* CountInteractorMock.swift in Sources */,
 				39D72EFF25F3DDAF00E585B4 /* CountRouterMock.swift in Sources */,
 				39D72EFE25F3DDAF00E585B4 /* CountViewModelTests.swift in Sources */,
+				395AD45625F601DB00A95E53 /* RxText+Encodable.swift in Sources */,
 				3940671225F4C7670021B394 /* Encodable+Diff.swift in Sources */,
 				39D72F0225F3DDAF00E585B4 /* CountInteractorTests.swift in Sources */,
 				39D72F0125F3DDAF00E585B4 /* CountRepositoryMock.swift in Sources */,

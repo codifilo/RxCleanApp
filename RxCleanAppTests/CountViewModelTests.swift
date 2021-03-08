@@ -75,10 +75,7 @@ final class CountViewModelTests: XCTestCase {
             .init(time: 200, value: .next(.init(countLabelText: "199 taps so far"))),
             .init(time: 300, value: .next(.init(countLabelText: "38742 taps so far"))),
         ]
-        XCTAssertEqual(viewStates.events.count, expectedResult.count)
-        for index in 0 ..< viewStates.events.count {
-            let diff = calculateDiff(viewStates.events[index], expectedResult[index])
-            XCTAssert(diff.isEmpty, diff)
-        }
+        
+        assertEquals(viewStates.events, expectedResult)
     }
 }

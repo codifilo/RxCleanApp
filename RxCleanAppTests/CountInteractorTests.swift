@@ -58,11 +58,7 @@ final class CountInteractorTests: XCTestCase {
             .init(time: 600, value: .next(.init(count: 14))),
             .init(time: 700, value: .next(.init(count: 15)))
         ]
-        XCTAssertEqual(result.events.count, expectedResult.count)
-        for index in 0 ..< result.events.count {
-            let diff = calculateDiff(result.events[index], expectedResult[index])
-            XCTAssert(diff.isEmpty, diff)
-        }
+        assertEquals(result.events, expectedResult)
         
         // Check it shows the alert message one time
         XCTAssertEqual(router.showAlertCallCount, 1)

@@ -1,10 +1,19 @@
 import Foundation
 import SwiftyJSON
-import RxTest
-import RxSwift
 
 /// Helpers to calculate human readable diffs to be used in unit tests fail messages
 extension Encodable  {
+    
+    var prettyPrint: String {
+        let encoder = JSONEncoder()
+        guard let data = (try? encoder.encode(self)),
+              let object = try? JSONSerialization.jsonObject(with: data, options: []),
+              let prettyData = try? JSONSerialization.data(withJSONObject: object, options: [.prettyPrinted]),
+              let prettyPrintedString = String(data: prettyData, encoding: .utf8) else {
+            return ""
+        }
+        return prettyPrintedString
+    }
     
     /// Returns the empty string if both values are equal.
     /// Otherwise returns which object attributes are different
@@ -113,28 +122,5 @@ extension Encodable  {
         }
         
         return result
-    }
-}
-
-/// Returns the empty string if both values are equal.
-/// Otherwise returns which object attributes are different
-func calculateDiff<E: Equatable & Encodable>(_ recorded1: Recorded<Event<E>>,
-                                             _ recorded2: Recorded<Event<E>>) -> String {
-    guard recorded1.time == recorded2.time else {
-        return "\nDifferent event times '\(recorded1.time)' != '\(recorded2.time)'"
-    }
-    
-    let element1 = recorded1.value.event.element
-    let element2 = recorded2.value.event.element
-    guard element1 != element2 else {
-        return ""
-    }
-    if let element1 = element1,
-       let element2 = element2 {
-        return "\nDifferent elements at time=\(recorded1.time)" + element1.calculateDiff(with: element2)
-    } else if element1 == nil {
-        return "\nMissing event element 1"
-    } else {
-        return "\nMissing event element 2"
     }
 }
