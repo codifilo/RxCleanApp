@@ -12,7 +12,6 @@ struct CountInteractorImplementation: CountInteractor {
     let state = BehaviorRelay<CountState>(value: .empty)
     let initialState = CountState.empty
     let countRepository: CountRepository
-    let router: CountRouter
     let disposeBag = DisposeBag()
     
     func handle(event: CountEvent) -> Observable<CountEffect> {
@@ -32,23 +31,7 @@ struct CountInteractorImplementation: CountInteractor {
     }
     
     private func processIncrementCountEvent() -> Observable<CountEffect> {
-        switch state.value.count {
-        case 4:
-            router.showAlert(title: "Warning",
-                             message: "You're tapping too much")
-        case 9:
-            router.showAlert(title: "Last Warning",
-                             message: "Are you trying to set a world record?. Take it easy. ")
-        case let x where x > 19:
-            router.showAlert(title: "FUCK OFF!",
-                             message: "")
-        default:
-            break
-        }
-        
-        storeIncrement()
-        
-        return Observable.just(.incrementCount)
+        Observable.just(.incrementCount)
     }
     
     private func storeIncrement() {

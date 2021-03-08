@@ -19,6 +19,8 @@ struct CountViewModelImplementation<Interactor: CountInteractor>: CountViewModel
     
     let interactor: Interactor
     
+    let router: CountRouter
+    
     func transform(viewEvent: CountViewEvent) -> CountEvent? {
         switch viewEvent {
         case .viewDidLoad:
@@ -32,5 +34,21 @@ struct CountViewModelImplementation<Interactor: CountInteractor>: CountViewModel
         CountViewState(
             countLabelText: "\(state.count) taps so far"
         )
+    }
+    
+    func didChange(state: CountState) {
+        switch state.count {
+        case 4:
+            router.showAlert(title: "Warning",
+                             message: "You're tapping too much")
+        case 9:
+            router.showAlert(title: "Last Warning",
+                             message: "Are you trying to set a world record?. Take it easy. ")
+        case let x where x > 19:
+            router.showAlert(title: "FUCK OFF!",
+                             message: "")
+        default:
+            break
+        }
     }
 }
