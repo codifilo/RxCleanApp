@@ -80,11 +80,7 @@ final class CountViewModelTests: XCTestCase {
         
         scheduler.start()
         
-        let times = result.events.map(\.time)
-        assertSnapshot(matching: times, as: .json)
-        let elements = result.events.compactMap(\.value.element)
-        assertSnapshot(matching: elements, as: .json)
-        
+        assertSnapshot(matching: result.events.map(RecordedValue.init), as: .json)
         
         // Check it shows the alert message one time
         XCTAssertEqual(router.showAlertCallCount, 2)

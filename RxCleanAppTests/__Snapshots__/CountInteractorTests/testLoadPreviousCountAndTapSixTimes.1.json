@@ -1,10 +1,50 @@
 [
-  0,
-  110,
-  200,
-  300,
-  400,
-  500,
-  600,
-  700
+  {
+    "time" : 0,
+    "value" : {
+      "count" : 0
+    }
+  },
+  {
+    "time" : 110,
+    "value" : {
+      "count" : 9
+    }
+  },
+  {
+    "time" : 200,
+    "value" : {
+      "count" : 10
+    }
+  },
+  {
+    "time" : 300,
+    "value" : {
+      "count" : 11
+    }
+  },
+  {
+    "time" : 400,
+    "value" : {
+      "count" : 12
+    }
+  },
+  {
+    "time" : 500,
+    "value" : {
+      "count" : 13
+    }
+  },
+  {
+    "time" : 600,
+    "value" : {
+      "count" : 14
+    }
+  },
+  {
+    "time" : 700,
+    "value" : {
+      "count" : 15
+    }
+  }
 ]

@@ -55,9 +55,6 @@ final class CountInteractorTests: XCTestCase {
         
         scheduler.start()
         
-        let times = result.events.map(\.time)
-        assertSnapshot(matching: times, as: .json)
-        let elements = result.events.compactMap(\.value.element)
-        assertSnapshot(matching: elements, as: .json)
+        assertSnapshot(matching: result.events.map(RecordedValue.init), as: .json)
     }
 }
