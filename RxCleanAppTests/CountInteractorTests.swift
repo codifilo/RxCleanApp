@@ -2,6 +2,7 @@ import XCTest
 import RxCocoa
 import RxSwift
 import RxTest
+import SnapshotTesting
 @testable import RxCleanApp
 
 final class CountInteractorTests: XCTestCase {
@@ -9,6 +10,14 @@ final class CountInteractorTests: XCTestCase {
     private var repository: CountRepositoryMock!
     private var scheduler: TestScheduler!
     private var sut: CountInteractorImplementation!
+    
+    override class func setUp() {
+        super.setUp()
+
+        // This is a global flag, if it's `true`, when the test runs it'll create a reference jsons instead of check the assertions.
+        // When the reference jsons have been generated, this flag should be `false`.
+        isRecording = false
+    }
     
     override func setUp() {
         super.setUp()
@@ -45,17 +54,30 @@ final class CountInteractorTests: XCTestCase {
         
         scheduler.start()
         
-        // Compare with expected result
-        let expectedResult: [Recorded<Event<CountState>>] = [
-            .init(time: 0, value: .next(.init(count: 0))),
-            .init(time: 110, value: .next(.init(count: 9))),
-            .init(time: 200, value: .next(.init(count: 10))),
-            .init(time: 300, value: .next(.init(count: 11))),
-            .init(time: 400, value: .next(.init(count: 12))),
-            .init(time: 500, value: .next(.init(count: 13))),
-            .init(time: 600, value: .next(.init(count: 14))),
-            .init(time: 700, value: .next(.init(count: 15)))
-        ]
-        assertEquals(result.events, expectedResult)
+        //
+        // With snapshot testing
+        // The library generates the reference jsons when we decide and it validates if the current state
+        // is the expected view state
+        //
+        
+        assertSnapshot(matching: sut.state.value, as: .json)
+        
+        
+        //
+        // Without snapshot testing
+        //
+        
+//        // Compare with expected result
+//        let expectedResult: [Recorded<Event<CountState>>] = [
+//            .init(time: 0, value: .next(.init(count: 0))),
+//            .init(time: 110, value: .next(.init(count: 9))),
+//            .init(time: 200, value: .next(.init(count: 10))),
+//            .init(time: 300, value: .next(.init(count: 11))),
+//            .init(time: 400, value: .next(.init(count: 12))),
+//            .init(time: 500, value: .next(.init(count: 13))),
+//            .init(time: 600, value: .next(.init(count: 14))),
+//            .init(time: 700, value: .next(.init(count: 15)))
+//        ]
+//        assertEquals(result.events, expectedResult)
     }
 }

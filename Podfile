@@ -15,4 +15,5 @@ target 'RxCleanAppTests' do
     pod 'RxTest', '6.1.0'
     pod 'RxCocoa', '6.1.0'
     pod 'SwiftyJSON', '~> 4.0'
+    pod 'SnapshotTesting', '~> 1.8.1'
 end
