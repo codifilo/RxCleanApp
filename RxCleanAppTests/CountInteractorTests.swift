@@ -6,7 +6,6 @@ import RxTest
 
 final class CountInteractorTests: XCTestCase {
     private var disposeBag: DisposeBag!
-    private var router: CountRouterMock!
     private var repository: CountRepositoryMock!
     private var scheduler: TestScheduler!
     private var sut: CountInteractorImplementation!
@@ -14,10 +13,9 @@ final class CountInteractorTests: XCTestCase {
     override func setUp() {
         super.setUp()
         disposeBag = .init()
-        router = .init()
         repository = .init()
         scheduler = .init(initialClock: 0)
-        sut = .init(countRepository: repository, router: router)
+        sut = .init(countRepository: repository)
         sut.setupBindings()
     }
     
@@ -59,8 +57,5 @@ final class CountInteractorTests: XCTestCase {
             .init(time: 700, value: .next(.init(count: 15)))
         ]
         assertEquals(result.events, expectedResult)
-        
-        // Check it shows the alert message one time
-        XCTAssertEqual(router.showAlertCallCount, 1)
     }
 }

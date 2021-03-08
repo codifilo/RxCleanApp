@@ -17,7 +17,9 @@ final class CountViewModelTests: XCTestCase {
         router = .init()
         interactor = .init()
         scheduler = .init(initialClock: 0)
-        sut = .init(interactor: interactor)
+        router = .init()
+        sut = .init(interactor: interactor,
+                    router: router)
         sut.setupBindings()
     }
     
@@ -77,5 +79,8 @@ final class CountViewModelTests: XCTestCase {
         ]
         
         assertEquals(viewStates.events, expectedResult)
+        
+        // Check it shows the alert message one time
+        XCTAssertEqual(router.showAlertCallCount, 2)
     }
 }
