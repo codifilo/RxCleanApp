@@ -1,0 +1,26 @@
+[
+  {
+    "time" : 0,
+    "value" : {
+      "countLabelText" : "0 taps so far"
+    }
+  },
+  {
+    "time" : 100,
+    "value" : {
+      "countLabelText" : "5 taps so far"
+    }
+  },
+  {
+    "time" : 200,
+    "value" : {
+      "countLabelText" : "199 taps so far"
+    }
+  },
+  {
+    "time" : 300,
+    "value" : {
+      "countLabelText" : "38742 taps so far"
+    }
+  }
+]
