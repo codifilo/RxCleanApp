@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3914734525F74F7700C606A1 /* ViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3914734425F74F7700C606A1 /* ViewFactory.swift */; };
 		392B5FFD25F3ED2B00E6ED8B /* CountViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392B5FFC25F3ED2B00E6ED8B /* CountViewFactory.swift */; };
 		395AD47D25F6351300A95E53 /* RecordedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395AD47C25F6351300A95E53 /* RecordedEvent.swift */; };
 		3990A8F825F53F8A00260539 /* UpdatableLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3990A8F725F53F8A00260539 /* UpdatableLayout.swift */; };
@@ -47,6 +48,7 @@
 
 /* Begin PBXFileReference section */
 		112D9882A9ED709286BDD5A7 /* Pods-RxCleanApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxCleanApp.release.xcconfig"; path = "Target Support Files/Pods-RxCleanApp/Pods-RxCleanApp.release.xcconfig"; sourceTree = "<group>"; };
+		3914734425F74F7700C606A1 /* ViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewFactory.swift; sourceTree = "<group>"; };
 		392B5FFC25F3ED2B00E6ED8B /* CountViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountViewFactory.swift; sourceTree = "<group>"; };
 		395AD47C25F6351300A95E53 /* RecordedEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordedEvent.swift; sourceTree = "<group>"; };
 		3990A8F725F53F8A00260539 /* UpdatableLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatableLayout.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 				39D72EEE25F3DD9800E585B4 /* RxInteractor.swift */,
 				39D72EEF25F3DD9800E585B4 /* RxViewModel.swift */,
 				39D72EF025F3DD9800E585B4 /* RxView.swift */,
+				3914734425F74F7700C606A1 /* ViewFactory.swift */,
 				3990A8F725F53F8A00260539 /* UpdatableLayout.swift */,
 			);
 			path = RxCleanArch;
@@ -431,6 +434,7 @@
 				39D72ED725F3DD6D00E585B4 /* CountRepository.swift in Sources */,
 				39D72ED925F3DD6D00E585B4 /* CountEvent.swift in Sources */,
 				39D72ED825F3DD6D00E585B4 /* CountInteractor.swift in Sources */,
+				3914734525F74F7700C606A1 /* ViewFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

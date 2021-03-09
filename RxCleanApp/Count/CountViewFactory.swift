@@ -1,11 +1,7 @@
 import Foundation
 import UIKit
 
-protocol CountViewFactory {
-    func createView() -> UIViewController
-}
-
-struct CountViewFactoryImplementation: CountViewFactory {
+struct CountViewFactory: ViewFactory {
     func createView() -> UIViewController {
         let view = CountViewController<CountViewModelImplementation<CountInteractorImplementation>>()
         

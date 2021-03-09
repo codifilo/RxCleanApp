@@ -12,8 +12,6 @@ protocol RxView: AnyObject {
     func bind(viewModel: BindingModel)
     
     var disposeBag: DisposeBag { get }
-    
-    
 }
 
 extension RxView where Self: UIViewController {

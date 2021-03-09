@@ -2,6 +2,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+
 /// A ViewModel transforms an interactor state changes into a ViewState
 /// including only the formatted data needed by a view
 protocol RxViewModel {
