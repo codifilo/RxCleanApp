@@ -2,21 +2,30 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-
-/// A ViewModel transforms an interactor state changes into a ViewState
-/// including only the formatted data needed by a view
-protocol RxViewModel {
+/// A ViewModel that receives view inputs and notifies view state changes
+protocol RxBasicViewModel {
     /// An event represents every event (user actions, view lifecycle...).
     associatedtype ViewEvent
     
     /// A ViewState represents the current state of a view.
     associatedtype ViewState: Equatable
     
-    /// The interactor that contains the state and events to transform
-    associatedtype Interactor: RxInteractor
-    
     /// The event from the view. Bind user inputs to this subject.
     var viewEvent: PublishSubject<ViewEvent> { get }
+    
+    /// View state updates ready to be consumed by a view
+    var viewState: Driver<ViewState> { get }
+    
+    /// Setup bindings.
+    /// Call this function when you are ready to send view events and receive view state updates
+    func setupBindings()
+}
+
+/// A ViewModel transforms an interactor state changes into a ViewState
+/// including only the formatted data needed by a view
+protocol RxViewModel: RxBasicViewModel {
+    /// The interactor that contains the state and events to transform
+    associatedtype Interactor: RxInteractor
     
     /// Interactor which this view model uses to transform its events and state
     var interactor: Interactor {  get }

@@ -2,17 +2,11 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-protocol CountViewModel: RxViewModel where
+protocol CountViewModel: RxBasicViewModel where
     ViewEvent == CountViewEvent,
-    ViewState == CountViewState,
-    Interactor.State == CountState,
-    Interactor.Effect == CountEffect,
-    Interactor.Event == CountEvent {
-    
-    var interactor: Interactor { get }
-}
+    ViewState == CountViewState {}
 
-struct CountViewModelImplementation<Interactor: CountInteractor>: CountViewModel {
+struct CountViewModelImplementation<Interactor: CountInteractor>: RxViewModel, CountViewModel {
     let viewEvent = PublishSubject<CountViewEvent>()
     
     let disposeBag = DisposeBag()

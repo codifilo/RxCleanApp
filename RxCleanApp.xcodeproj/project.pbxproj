@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3914734525F74F7700C606A1 /* ViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3914734425F74F7700C606A1 /* ViewFactory.swift */; };
+		3914734B25F7506F00C606A1 /* CountViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3914734A25F7506F00C606A1 /* CountViewControllerTests.swift */; };
+		3914735925F7510E00C606A1 /* CountViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3914735825F7510E00C606A1 /* CountViewModelMock.swift */; };
 		392B5FFD25F3ED2B00E6ED8B /* CountViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392B5FFC25F3ED2B00E6ED8B /* CountViewFactory.swift */; };
 		395AD47D25F6351300A95E53 /* RecordedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395AD47C25F6351300A95E53 /* RecordedEvent.swift */; };
 		3990A8F825F53F8A00260539 /* UpdatableLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3990A8F725F53F8A00260539 /* UpdatableLayout.swift */; };
@@ -49,6 +51,8 @@
 /* Begin PBXFileReference section */
 		112D9882A9ED709286BDD5A7 /* Pods-RxCleanApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxCleanApp.release.xcconfig"; path = "Target Support Files/Pods-RxCleanApp/Pods-RxCleanApp.release.xcconfig"; sourceTree = "<group>"; };
 		3914734425F74F7700C606A1 /* ViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewFactory.swift; sourceTree = "<group>"; };
+		3914734A25F7506F00C606A1 /* CountViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountViewControllerTests.swift; sourceTree = "<group>"; };
+		3914735825F7510E00C606A1 /* CountViewModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountViewModelMock.swift; sourceTree = "<group>"; };
 		392B5FFC25F3ED2B00E6ED8B /* CountViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountViewFactory.swift; sourceTree = "<group>"; };
 		395AD47C25F6351300A95E53 /* RecordedEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordedEvent.swift; sourceTree = "<group>"; };
 		3990A8F725F53F8A00260539 /* UpdatableLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatableLayout.swift; sourceTree = "<group>"; };
@@ -141,6 +145,7 @@
 				39D72EF925F3DDAF00E585B4 /* Mocks */,
 				39D72EFD25F3DDAF00E585B4 /* CountInteractorTests.swift */,
 				39D72EF825F3DDAF00E585B4 /* CountViewModelTests.swift */,
+				3914734A25F7506F00C606A1 /* CountViewControllerTests.swift */,
 				395AD47C25F6351300A95E53 /* RecordedEvent.swift */,
 				39D72EA725F3DCDB00E585B4 /* Info.plist */,
 			);
@@ -209,6 +214,7 @@
 				39D72EFA25F3DDAF00E585B4 /* CountRouterMock.swift */,
 				39D72EFB25F3DDAF00E585B4 /* CountInteractorMock.swift */,
 				39D72EFC25F3DDAF00E585B4 /* CountRepositoryMock.swift */,
+				3914735825F7510E00C606A1 /* CountViewModelMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -444,6 +450,8 @@
 			files = (
 				39D72F0025F3DDAF00E585B4 /* CountInteractorMock.swift in Sources */,
 				39D72EFF25F3DDAF00E585B4 /* CountRouterMock.swift in Sources */,
+				3914735925F7510E00C606A1 /* CountViewModelMock.swift in Sources */,
+				3914734B25F7506F00C606A1 /* CountViewControllerTests.swift in Sources */,
 				395AD47D25F6351300A95E53 /* RecordedEvent.swift in Sources */,
 				39D72EFE25F3DDAF00E585B4 /* CountViewModelTests.swift in Sources */,
 				39D72F0225F3DDAF00E585B4 /* CountInteractorTests.swift in Sources */,

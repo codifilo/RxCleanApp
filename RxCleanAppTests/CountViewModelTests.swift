@@ -11,16 +11,7 @@ final class CountViewModelTests: XCTestCase {
     private var interactor: CountInteractorMock!
     private var sut: CountViewModelImplementation<CountInteractorMock>!
     private var scheduler: TestScheduler!
-    
-    override class func setUp() {
-        super.setUp()
 
-        // This is a global flag, if it's `true`, when the test runs it'll create a reference jsons
-        // instead of check the assertions.
-        // When the reference jsons have been generated, this flag should be `false`.
-        isRecording = false
-    }
-    
     override func setUp() {
         super.setUp()
         disposeBag = .init()

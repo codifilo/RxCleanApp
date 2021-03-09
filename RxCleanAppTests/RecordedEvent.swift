@@ -1,10 +1,3 @@
-//
-//  RecordedEvent.swift
-//  RxCleanAppTests
-//
-//  Created by Agus on 8/3/21.
-//
-
 import Foundation
 import RxTest
 import RxSwift

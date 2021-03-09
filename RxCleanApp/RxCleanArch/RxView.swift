@@ -3,7 +3,7 @@ import RxSwift
 import RxCocoa
 
 protocol RxView: AnyObject {
-    associatedtype BindingModel: RxViewModel
+    associatedtype BindingModel: RxBasicViewModel
 
     /// A view's viewModel. `bind(viewModel:)` gets called when the new value is assigned to this property.
     var viewModel: BindingModel? { get set }
