@@ -6,14 +6,39 @@ protocol CountViewModel: RxBasicViewModel where
     ViewEvent == CountViewEvent,
     ViewState == CountViewState {}
 
+typealias CountInteractor = RxInteractor<CountEvent, CountEffect, CountState>
+
 struct CountViewModelImplementation: RxViewModel, CountViewModel {
     let viewEvent = PublishSubject<CountViewEvent>()
     
     let disposeBag = DisposeBag()
     
-    let interactor: RxInteractor<CountEvent, CountEffect, CountState>
+    let interactor: CountInteractor
     
     let router: CountRouter
+    
+    init(interactor: CountInteractor, router: CountRouter) {
+        self.interactor = interactor
+        self.router = router
+        
+        viewEvent
+            .subscribe(onNext: { _ in
+                switch interactor.state.value.count {
+                case 4:
+                    router.showAlert(title: "Warning",
+                                     message: "You're tapping too much")
+                case 9:
+                    router.showAlert(title: "Last Warning",
+                                     message: "Are you trying to set a world record?. Take it easy. ")
+                case let x where x > 19:
+                    router.showAlert(title: "FUCK OFF!",
+                                     message: "")
+                default:
+                    break
+                }
+            })
+            .disposed(by: disposeBag)
+    }
     
     func transform(viewEvent: CountViewEvent) -> CountEvent? {
         switch viewEvent {
@@ -30,19 +55,11 @@ struct CountViewModelImplementation: RxViewModel, CountViewModel {
         )
     }
     
+    private func process(event: CountViewEvent, state: CountState) {
+        
+    }
+    
     func didChange(state: CountState) {
-        switch state.count {
-        case 4:
-            router.showAlert(title: "Warning",
-                             message: "You're tapping too much")
-        case 9:
-            router.showAlert(title: "Last Warning",
-                             message: "Are you trying to set a world record?. Take it easy. ")
-        case let x where x > 19:
-            router.showAlert(title: "FUCK OFF!",
-                             message: "")
-        default:
-            break
-        }
+
     }
 }

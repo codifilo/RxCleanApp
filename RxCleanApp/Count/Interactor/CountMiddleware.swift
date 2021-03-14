@@ -17,15 +17,12 @@ final class CountMiddleware: RxMiddleware {
     
     private let effectSubject = PublishSubject<CountEffect>()
     
-    deinit {
-        debugPrint("Deinit")
-    }
-    
     init(countRepository: CountRepository) {
         self.countRepository = countRepository
         
         // Handle state changes
         state
+            .skip(2)
             .map(\.count)
             .distinctUntilChanged()
             .flatMap { [weak self] in

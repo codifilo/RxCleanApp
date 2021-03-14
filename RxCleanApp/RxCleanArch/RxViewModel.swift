@@ -37,10 +37,6 @@ protocol RxViewModel: RxBasicViewModel {
     /// Transforms an interactor state into a view state
     func transform(state: State) -> ViewState
     
-    /// Called when there is a change in Interactor State.
-    /// Perform here side effects like view routing and tracking
-    func didChange(state: State)
-    
     var disposeBag: DisposeBag { get }
 }
 
@@ -52,12 +48,6 @@ extension RxViewModel {
         viewEvent
             .compactMap(transform(viewEvent:))
             .bind(to: interactor.event)
-            .disposed(by: disposeBag)
-        
-        // Connect state changes for performing view related side effects like routing
-        interactor
-            .state
-            .bind(onNext: didChange(state:))
             .disposed(by: disposeBag)
     }
     
