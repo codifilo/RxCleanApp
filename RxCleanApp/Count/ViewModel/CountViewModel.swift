@@ -54,12 +54,4 @@ struct CountViewModelImplementation: RxViewModel, CountViewModel {
             countLabelText: "\(state.count) taps so far"
         )
     }
-    
-    private func process(event: CountViewEvent, state: CountState) {
-        
-    }
-    
-    func didChange(state: CountState) {
-
-    }
 }
