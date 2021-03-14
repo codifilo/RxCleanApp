@@ -96,6 +96,6 @@ final class CountViewController<ViewModel: CountViewModel>: UIViewController, Rx
             .disposed(by: disposeBag)
         
         // Effects
-        bind((\CountViewState.countLabelText).asOptional, to: label.rx.text)
+        bind(\CountViewState.countLabelText, to: label.rx.text)
     }
 }

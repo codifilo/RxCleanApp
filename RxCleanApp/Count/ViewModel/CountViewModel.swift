@@ -6,12 +6,12 @@ protocol CountViewModel: RxBasicViewModel where
     ViewEvent == CountViewEvent,
     ViewState == CountViewState {}
 
-struct CountViewModelImplementation<Interactor: CountInteractor>: RxViewModel, CountViewModel {
+struct CountViewModelImplementation: RxViewModel, CountViewModel {
     let viewEvent = PublishSubject<CountViewEvent>()
     
     let disposeBag = DisposeBag()
     
-    let interactor: Interactor
+    let interactor: RxInteractor<CountEvent, CountEffect, CountState>
     
     let router: CountRouter
     

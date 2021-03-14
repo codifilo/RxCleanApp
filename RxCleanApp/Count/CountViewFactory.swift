@@ -3,11 +3,13 @@ import UIKit
 
 struct CountViewFactory: ViewFactory {
     func createView() -> UIViewController {
-        let view = CountViewController<CountViewModelImplementation<CountInteractorImplementation>>()
+        let view = CountViewController<CountViewModelImplementation>()
         
         view.viewModel = CountViewModelImplementation(
-            interactor: CountInteractorImplementation(
-                countRepository: CountUserDefaultsRepository()
+            interactor: RxInteractor(
+                AnyRxMiddleware(CountMiddleware(countRepository: CountUserDefaultsRepository())),
+                countReducer,
+                .empty
             ),
             router: CountRouterImplementation(view: view)
         )

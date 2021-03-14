@@ -8,19 +8,23 @@ import SnapshotTesting
 final class CountViewModelTests: XCTestCase {
     private var disposeBag: DisposeBag!
     private var router: CountRouterMock!
-    private var interactor: CountInteractorMock!
-    private var sut: CountViewModelImplementation<CountInteractorMock>!
+    private var interactor: RxInteractor<CountEvent, CountEffect, CountState>!
+    private var sut: CountViewModelImplementation!
+    private var repository: CountRepositoryMock!
     private var scheduler: TestScheduler!
 
     override func setUp() {
         super.setUp()
+        isRecording = false
         disposeBag = .init()
         router = .init()
-        interactor = .init()
         scheduler = .init(initialClock: 0)
         router = .init()
-        sut = .init(interactor: interactor,
-                    router: router)
+        repository = .init()
+        interactor = .init(AnyRxMiddleware(CountMiddleware(countRepository: repository)),
+                           countReducer,
+                           .empty)
+        sut = .init(interactor: interactor, router: router)
         sut.setupBindings()
     }
     

@@ -24,21 +24,22 @@ protocol RxBasicViewModel {
 /// A ViewModel transforms an interactor state changes into a ViewState
 /// including only the formatted data needed by a view
 protocol RxViewModel: RxBasicViewModel {
-    /// The interactor that contains the state and events to transform
-    associatedtype Interactor: RxInteractor
+    associatedtype Event
+    associatedtype Effect
+    associatedtype State
     
     /// Interactor which this view model uses to transform its events and state
-    var interactor: Interactor {  get }
+    var interactor: RxInteractor<Event, Effect, State> {  get }
     
     /// Transforms a view event into an interactor event
-    func transform(viewEvent: ViewEvent) -> Interactor.Event?
+    func transform(viewEvent: ViewEvent) -> Event?
     
     /// Transforms an interactor state into a view state
-    func transform(state: Interactor.State) -> ViewState
+    func transform(state: State) -> ViewState
     
     /// Called when there is a change in Interactor State.
     /// Perform here side effects like view routing and tracking
-    func didChange(state: Interactor.State)
+    func didChange(state: State)
     
     var disposeBag: DisposeBag { get }
 }
@@ -47,8 +48,6 @@ extension RxViewModel {
     /// Setup bindings.
     /// Call this function when you are ready to send view events and receive view state updates
     func setupBindings() {
-        interactor.setupBindings()
-        
         // Send transformed events to interactor
         viewEvent
             .compactMap(transform(viewEvent:))

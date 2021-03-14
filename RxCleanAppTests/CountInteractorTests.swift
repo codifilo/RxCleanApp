@@ -9,24 +9,19 @@ final class CountInteractorTests: XCTestCase {
     private var disposeBag: DisposeBag!
     private var repository: CountRepositoryMock!
     private var scheduler: TestScheduler!
-    private var sut: CountInteractorImplementation!
-    
-    override class func setUp() {
-        super.setUp()
-
-        // This is a global flag, if it's `true`, when the test runs it'll create a reference jsons
-        // instead of check the assertions.
-        // When the reference jsons have been generated, this flag should be `false`.
-        isRecording = false
-    }
+    private var sut: RxInteractor<CountEvent, CountEffect, CountState>!
     
     override func setUp() {
         super.setUp()
+        isRecording = false
         disposeBag = .init()
         repository = .init()
         scheduler = .init(initialClock: 0)
-        sut = .init(countRepository: repository)
-        sut.setupBindings()
+        sut = RxInteractor(
+            AnyRxMiddleware(CountMiddleware(countRepository: repository)),
+            countReducer,
+            .empty
+        )
     }
     
     func testLoadPreviousCountAndTapSixTimes() {

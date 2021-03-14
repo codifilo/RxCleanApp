@@ -3,50 +3,54 @@ import RxSwift
 import RxCocoa
 
 /// Contains the business logic as specified by a use case
-protocol RxInteractor {
-    /// An event represents external signals that triggers state changes or side-effects
-    associatedtype Event
+/// An event represents external signals that triggers state changes or side-effects
+/// An effect represents state changes.
+/// An State represents the current interactor state.
+struct RxInteractor<Event, Effect, State> {
     
-    /// An effect represents state changes.
-    associatedtype Effect
-    
-    /// An State represents the current interactor state.
-    associatedtype State: Equatable
-
     /// Events coming in from the outside.
-    var event: PublishSubject<Event> { get }
-    
-    /// The state stream. Use this observable to observe the state changes.
-    var state: BehaviorRelay<State> { get }
-    
-    /// The initial state.
-    var initialState: State { get }
-    
-    var disposeBag: DisposeBag { get }
+    let event = PublishSubject<Event>()
     
     /// Generates an effect from the event.
     /// This is the best place to perform side-effects such as async tasks.
-    func handle(event: Event) -> Observable<Effect>
+    let middleware: AnyRxMiddleware<Event, Effect, State>
     
     /// Generates a new state with the previous state and the action. It should be purely functional
     /// so it should not perform any side-effects here. This method is called every time when the
     /// effect is committed.
-    func reduce(state: State, effect: Effect) -> State
-}
-
-extension RxInteractor {
-    /// Setup internal bindings.
-    /// Call this function when you are ready to send events and receive state updates.
-    func setupBindings() {
-        let resultEffect = event.flatMap { event -> Observable<Effect> in
-            handle(event: event).catch { _ in .empty() }
-        }
+    let reducer: Reducer<Effect, State>
+    
+    /// The state stream. Use this observable to observe the state changes.
+    let state: BehaviorRelay<State>
+    
+    private let disposeBag = DisposeBag()
+    
+    init(_ middleware: AnyRxMiddleware<Event, Effect, State>,
+         _ reducer: Reducer<Effect, State>,
+         _ initialState: State) {
         
-        let performEffects = resultEffect
-            .scan(initialState, accumulator: reduce(state: effect: ))
-            .catch { _ in .empty() }
+        self.middleware = middleware
+        self.reducer = reducer
+        self.state = BehaviorRelay<State>(value: initialState)
+        
+        // Send states to middleware
+        state
+            .bind(to: middleware.state)
+            .disposed(by: disposeBag)
+        
+        // Send events to middleware
+        event
+            .bind(to: middleware.event)
+            .disposed(by: disposeBag)
+        
+        // Perform effects from middleware
+        let performEffects = middleware.effect
+            .scan(initialState, accumulator: {
+                state, effect in reducer.reduce(effect, state)  
+            }).catch { _ in .empty() }
             .startWith(initialState)
         
+        // Notify state updates
         let transformedState = performEffects
             .do(onNext: state.accept)
             .replay(1)
